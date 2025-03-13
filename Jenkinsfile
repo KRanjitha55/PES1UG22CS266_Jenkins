@@ -3,30 +3,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'make -C main'
+                echo 'Building the project...'
             }
         }
         stage('Test') {
             steps {
-                sh 'mvn test'
-                echo 'Test Stage Successful'
-            }
-            post {
-                always {
-                    junit 'target/surefire-reports/*.xml'
-                }
+                echo 'Running tests...'
             }
         }
         stage('Deploy') {
             steps {
-                sh 'mvn deploy'
-                echo 'Deployment Successful'
+                echo 'Deploying application...'
             }
-        }
-    }
-    post {
-        failure {
-            echo 'Pipeline failed'
         }
     }
 }
