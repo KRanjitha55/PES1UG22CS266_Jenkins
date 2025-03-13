@@ -4,22 +4,26 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                    sh 'g++ hello.cpp -o hello.out'
+                sh 'mvn clean install'
+                echo 'Build Stage Successful'
                 }
             }
-        }
+
 
         stage('Test') {
             steps {
-                script {
-                    sh './hello.out'
+                sh 'mvn test'
+                echo 'Test Stage Successful'
+                post{
+                    always{
+                        junit 'target/surefire-reports/*.xml'
                 }
             }
         }
 
         stage('Deploy') {
             steps {
+                sh 'mvn deploy'
                 echo 'Deployment Successful'
             }
         }
