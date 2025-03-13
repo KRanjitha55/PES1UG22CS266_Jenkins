@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'g++ main/hello.cpp -o hello.out'
+                sh 'make -C main'
             }
         }
         stage('Test') {
